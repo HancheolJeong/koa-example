@@ -22,23 +22,38 @@
 //  console.log(`웹서버 구동... ${port}`);
 // });
 
+// const Koa = require('koa');
+// const Router = require('@koa/router');
+// const app = new Koa();
+// const router = new Router();
+// const port = process.env.PORT || 3000;
+// router.get('/', (ctx, next) => {
+//  ctx.body = 'Hello World';
+// });
+// router.get('/sitemap', (ctx, next) => {
+//  ctx.body = '사이트맵';
+// });
+// router.get('/page/:name', (ctx, next) => {
+//  let name = ctx.params.name;
+//  ctx.body = `${name} 페이지`;
+// });
+// app.use(router.routes());
+// app.use(router.allowedMethods());
+// app.listen(port, () => {
+//  console.log(`웹서버 구동... ${port}`);
+// });
+
 const Koa = require('koa');
 const Router = require('@koa/router');
 const app = new Koa();
 const router = new Router();
+//서버 실행 포트
 const port = process.env.PORT || 3000;
-router.get('/', (ctx, next) => {
- ctx.body = 'Hello World';
-});
-router.get('/sitemap', (ctx, next) => {
- ctx.body = '사이트맵';
-});
-router.get('/page/:name', (ctx, next) => {
- let name = ctx.params.name;
- ctx.body = `${name} 페이지`;
-});
+// 라우터 설정
+router.use(require('./src/routes').routes());
 app.use(router.routes());
 app.use(router.allowedMethods());
+// 서버 실행
 app.listen(port, () => {
  console.log(`웹서버 구동... ${port}`);
 });
