@@ -72,11 +72,11 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser({formLimit: '5mb'}));
 // 라우터 설정
 app.use(require('koa-static')(`${__dirname}/public`));
-router.use(require('./src/router').routes());
+router.use(require('./src/routes').routes());
 app.use(router.routes());
 app.use(router.allowedMethods());
 render(app, {
-    layout: 'layouts/template',
+    layout: null,
     root: path.join(__dirname, '/views'),
     viewExt: 'ejs', cache:false,
 });
