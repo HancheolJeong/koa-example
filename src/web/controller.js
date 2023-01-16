@@ -2,21 +2,24 @@ exports.home = (ctx, next) => {
     ctx.body = "Hello World";
 }
 
-exports.page = (ctx, next) =>{
+exports.page = async (ctx, next) =>{
     let page = ctx.params.page;
-    let content;
+    let pagename;
     switch(page)
     {
         case 'terms':
-            content = "이용약관";
+            pagename = "이용약관";
             break;
         case 'policy':
-            content = "개인정보 처리방침";
+            pagename = "개인정보 처리방침";
+            break;
+        default:
+            pagename="오류";
             break;
     
             
     }
-    
-    ctx.body = content;
+
+    await ctx.render('index', {pagename : pagename});
 }
 
