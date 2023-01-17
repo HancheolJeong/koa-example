@@ -34,6 +34,12 @@ const webController = require('./web/controller')
 const apiUserController = require('./api/user/controller');
 const apiFeedController = require('./api/feed/controller');
 const {verify} = require('./middleware/auth');
+const multer = require('@koa/multer');
+const path = require('path');
+const upload = multer({
+    dest: path.resolve(__dirname, '../', 'storage')
+})
+
 
 router.use(myLogging);
 router.get('/', webController.home);
@@ -42,6 +48,9 @@ router.get('/page/:page', webController.page);
 router.get('/api/user/:id', apiUserController.info);
 router.post('/api/user/register', apiUserController.register);
 router.post('/api/user/login', apiUserController.login);
+
+router.post('/file/upload', upload.single('file'), require('./api/file/controller').upload);
+
 
 
 router.use(verify);
