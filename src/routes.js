@@ -50,7 +50,7 @@ router.post('/api/user/register', apiUserController.register);
 router.post('/api/user/login', apiUserController.login);
 
 router.post('/file/upload', upload.single('file'), require('./api/file/controller').upload);
-
+router.get('/file/:id', require('./api/file/controller').download);
 
 
 router.use(verify);
