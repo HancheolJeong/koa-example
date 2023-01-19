@@ -53,7 +53,7 @@ router.post('/file/upload', upload.single('file'), require('./api/file/controlle
 router.get('/file/:id', require('./api/file/controller').download);
 
 
-router.use(verify);
+//router.use(verify);
 router.get('/api/feed', apiFeedController.index);
 router.post('/api/feed', apiFeedController.store);
 router.get('/api/feed/:id', apiFeedController.show);
